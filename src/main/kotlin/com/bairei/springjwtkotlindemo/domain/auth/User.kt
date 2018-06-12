@@ -13,8 +13,7 @@ data class User (
     var firstName: String = "",
     var lastName: String = "",
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns = arrayOf(
-            JoinColumn(name = "user_role", referencedColumnName = "id")),
-            inverseJoinColumns = arrayOf(JoinColumn(name = "role_id", referencedColumnName = "id")))
-    var roles: List<Role> = ArrayList()
+    @JoinTable(name = "user_role", joinColumns = [(JoinColumn(name = "user_role", referencedColumnName = "id"))],
+            inverseJoinColumns = [(JoinColumn(name = "role_id", referencedColumnName = "id"))])
+    var roles: MutableList<Role> = ArrayList()
 )

@@ -1,5 +1,6 @@
 package com.bairei.springjwtkotlindemo.domain.auth
 
+import org.springframework.security.core.GrantedAuthority
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -10,6 +11,7 @@ data class Role(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         var id: Long? = null,
-        var roleName: String = "",
-        var description: String = ""
-)
+        var roleName: String = ""
+): GrantedAuthority {
+        override fun getAuthority(): String = roleName
+}
