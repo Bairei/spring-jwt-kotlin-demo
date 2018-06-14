@@ -7,7 +7,13 @@
   <b-collapse is-nav id="nav_collapse">
 
     <b-navbar-nav>
-      <b-nav-item to="/" exact>Link</b-nav-item>
+      <b-nav-item to="/" exact>Home</b-nav-item>
+      <template v-if="isLoggedIn">
+        <b-nav-item-dropdown right text="Car">
+          <b-dropdown-header>Hello</b-dropdown-header>
+          <b-dropdown-item to="/car">List</b-dropdown-item>
+        </b-nav-item-dropdown>
+      </template>
     </b-navbar-nav>
 
     <!-- Right aligned nav items -->

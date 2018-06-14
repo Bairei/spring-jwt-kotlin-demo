@@ -1,23 +1,26 @@
 <template>
-    <b-form @submit.prevent="onSubmit" class="col-sm-4 offset-sm-4">
-        <b-form-group label="Username"
-                    label-for="form.username"
-                    description="Enter your username">
-            <b-form-input v-model="form.username" type="text" required></b-form-input>
-        </b-form-group>
-        <b-form-group label="Password"
-                label-for="form.password"
-                description="Enter your password">
-            <b-form-input v-model="form.password" type="password" required></b-form-input>
-        </b-form-group>
+    <div>
+        <b-alert :show="isLoginInvalid" dismissible variant="danger">Unable to log in, make sure to insert correct password, or if your username exists in database.</b-alert>    
+        <b-form @submit.prevent="onSubmit" class="col-sm-4 offset-sm-4">
+            <b-form-group label="Username"
+                        label-for="form.username"
+                        description="Enter your username">
+                <b-form-input v-model="form.username" :class="{'is-invalid': isLoginInvalid}" type="text" required></b-form-input>
+            </b-form-group>
+            <b-form-group label="Password"
+                    label-for="form.password"
+                    description="Enter your password">
+                <b-form-input v-model="form.password" :class="{'is-invalid': isLoginInvalid}" type="password" required></b-form-input>
+            </b-form-group>
 
-        <b-button type="submit" variant="primary">Submit</b-button>
-        <b-button type="reset" @click="onReset" variant="warning">Reset</b-button>
-    </b-form>
+            <b-button type="submit" variant="primary">Submit</b-button>
+            <b-button type="reset" @click="onReset" variant="warning">Reset</b-button>
+        </b-form>
+    </div>
 </template>
 
 <script>
-import { authService } from './authService.js';
+import { AuthService } from './authService.js';
 
 export default {
     data() {
@@ -25,16 +28,18 @@ export default {
             form: {
                 username: '',
                 password: ''
-            }
+            },
+            isLoginInvalid: false
         }
     },
     methods: {
         onSubmit(event) {
-            authService.login(this.form).then(token => {
-                // console.log(token);
+            AuthService.login(this.form).then(token => {               
                 this.$store.dispatch('login', token);
-                //this.$store.dispatch()
                 this.$router.push({path: '/'});
+            }).catch(err => {
+                console.error(err);
+                this.isLoginInvalid = true;
             });
         },
         onReset() {

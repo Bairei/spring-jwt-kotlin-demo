@@ -50,7 +50,7 @@
 
 <script>
 
-import { authService } from './authService.js'
+import { AuthService } from './authService.js'
 
 export default {
     data() {
@@ -74,7 +74,7 @@ export default {
                 this.isFormInvalid = true;
                 return;
             }
-            authService.register(this.form).then(() => {
+            AuthService.register(this.form).then(() => {
                 this.$router.push({path: '/'});
             });
         },

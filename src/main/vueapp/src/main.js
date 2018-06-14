@@ -23,7 +23,7 @@ new Vue({
   render: h => h(App)
 })
 
-let token = localStorage.getItem('authorization');
-if (token !== null || token !== 'undefined') {
-  store.dispatch('login', token);
+const token = localStorage.getItem('authorization')
+if (token && token.split(" ").length > 1) {
+  store.dispatch('login', token)
 }
