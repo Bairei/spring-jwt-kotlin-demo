@@ -49,6 +49,9 @@
 </template>
 
 <script>
+
+import { authService } from './authService.js'
+
 export default {
     data() {
         return {
@@ -65,13 +68,15 @@ export default {
     methods: {
         onSubmit(event) {
             console.log(this.form);
+            console.log(this.$router);
+            this.isFormInvalid = false;
             if (!this.isValid()) {
-                console.log("invalid");
                 this.isFormInvalid = true;
-            } else {
-                this.isFormInvalid = false;
+                return;
             }
-            console.log(this.isFormInvalid);
+            authService.register(this.form).then(() => {
+                this.$router.push({path: '/'});
+            });
         },
         onReset() {
             this.form.username = '';

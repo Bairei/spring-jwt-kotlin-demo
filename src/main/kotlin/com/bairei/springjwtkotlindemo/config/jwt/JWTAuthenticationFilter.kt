@@ -46,5 +46,5 @@ class JWTAuthenticationFilter(
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact()
         response.addHeader(HEADER_STRING, TOKEN_PREFIX + token)
-    }
+        }
 }

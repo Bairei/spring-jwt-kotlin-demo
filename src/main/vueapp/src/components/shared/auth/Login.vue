@@ -3,12 +3,12 @@
         <b-form-group label="Username"
                     label-for="form.username"
                     description="Enter your username">
-            <b-form-input v-model="form.username" type="text"></b-form-input>
+            <b-form-input v-model="form.username" type="text" required></b-form-input>
         </b-form-group>
         <b-form-group label="Password"
                 label-for="form.password"
                 description="Enter your password">
-            <b-form-input v-model="form.password" type="password"></b-form-input>
+            <b-form-input v-model="form.password" type="password" required></b-form-input>
         </b-form-group>
 
         <b-button type="submit" variant="primary">Submit</b-button>
@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import { authService } from './authService.js';
+
 export default {
     data() {
         return {
@@ -28,7 +30,10 @@ export default {
     },
     methods: {
         onSubmit(event) {
-            console.log(this.form);
+            authService.login(this.form).then(response => {
+                console.log(response);
+                this.$router.push({path: '/'});
+            });
         },
         onReset() {
             this.form.username = '';

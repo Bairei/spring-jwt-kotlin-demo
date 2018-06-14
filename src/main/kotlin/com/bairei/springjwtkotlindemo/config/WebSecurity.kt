@@ -39,7 +39,14 @@ class WebSecurity(@Qualifier("myUserDetails") private val userDetailsService: Us
     @Bean
     fun corsConfigurationSource(): CorsConfigurationSource {
         val source = UrlBasedCorsConfigurationSource()
-        source.registerCorsConfiguration("/**", CorsConfiguration().applyPermitDefaultValues())
+        val config = CorsConfiguration().apply {
+            allowCredentials = true
+            allowedOrigins = arrayListOf("http://localhost:8081", "http://localhost:4200")
+            addExposedHeader(SecurityConstants.HEADER_STRING)
+            allowedHeaders = arrayListOf("*")
+            allowedMethods = arrayListOf("*")
+        }
+        source.registerCorsConfiguration("/**", config)
         return source
     }
 }

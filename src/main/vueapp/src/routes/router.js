@@ -19,5 +19,5 @@ export const router = new VueRouter({
             component: Login
         }
 
-    ]
+    ], mode: 'history'
 })
