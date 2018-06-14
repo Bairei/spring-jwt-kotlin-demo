@@ -13,9 +13,15 @@
     <!-- Right aligned nav items -->
     <b-navbar-nav class="ml-auto">
         
-        <b-nav-item to="/login">Log in</b-nav-item>
-        <b-nav-item to="/register">Register</b-nav-item>
-
+        <template v-if="!isLoggedIn">
+          <b-nav-item to="/login">Log in</b-nav-item>
+          <b-nav-item to="/register">Register</b-nav-item>
+        </template>
+        <template v-else>
+          <b-nav-text>Welcome, {{user}}!</b-nav-text>
+          <b-nav-item @click.prevent="logout()">Log out</b-nav-item>
+        </template>
+        
     </b-navbar-nav>
 
   </b-collapse>
@@ -25,7 +31,19 @@
 
 <script>
 export default {
-
+  computed: {
+    isLoggedIn() {
+      return this.$store.state.isLoggedIn;
+    },
+    user() {
+      return this.$store.state.username
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout');
+    }
+  }
 }
 </script>
 

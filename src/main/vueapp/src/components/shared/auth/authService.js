@@ -7,7 +7,8 @@ export const authService = {
         return httpApi.post('/login', form, {
             withCredentials: true
         }).then(response => {
-            console.log(response.headers);
+            // console.log(response.headers['authorization']);
+            return response.headers['authorization'];
         }).catch(err => console.error(err));
     },
     register(form) {

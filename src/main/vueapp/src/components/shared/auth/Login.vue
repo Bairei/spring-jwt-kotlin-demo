@@ -30,8 +30,10 @@ export default {
     },
     methods: {
         onSubmit(event) {
-            authService.login(this.form).then(response => {
-                console.log(response);
+            authService.login(this.form).then(token => {
+                // console.log(token);
+                this.$store.dispatch('login', token);
+                //this.$store.dispatch()
                 this.$router.push({path: '/'});
             });
         },

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
 import VueRouter from 'vue-router'
-
+import Vuex from 'vuex'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
@@ -11,6 +11,7 @@ import 'bootstrap/dist/js/bootstrap.js'
 
 import App from './App.vue'
 import { router } from './routes/router'
+import { store } from './store/store.js'
 
 Vue.use(VueRouter)
 Vue.use(BootstrapVue)
@@ -18,5 +19,11 @@ Vue.use(BootstrapVue)
 new Vue({
   el: '#app',
   router,
+  store,
   render: h => h(App)
 })
+
+let token = localStorage.getItem('authorization');
+if (token !== null || token !== 'undefined') {
+  store.dispatch('login', token);
+}
