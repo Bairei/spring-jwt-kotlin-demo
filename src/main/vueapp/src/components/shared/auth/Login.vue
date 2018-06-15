@@ -1,6 +1,10 @@
 <template>
     <div>
-        <b-alert :show="isLoginInvalid" dismissible variant="danger">Unable to log in, make sure to insert correct password, or if your username exists in database.</b-alert>    
+        <b-alert :show="isLoginInvalid" dismissible variant="danger">
+            Unable to log in, make sure to insert correct password, or if your username exists in database.
+            <br>
+            Don't have an account? <router-link to="/register">Click here</router-link> to register!
+        </b-alert>    
         <b-form @submit.prevent="onSubmit" class="col-sm-4 offset-sm-4">
             <b-form-group label="Username"
                         label-for="form.username"
@@ -40,6 +44,7 @@ export default {
             }).catch(err => {
                 console.error(err);
                 this.isLoginInvalid = true;
+                this.onReset();
             });
         },
         onReset() {

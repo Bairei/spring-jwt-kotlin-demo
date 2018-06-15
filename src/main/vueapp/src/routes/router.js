@@ -5,22 +5,38 @@ import Register from '../components/shared/auth/Register.vue'
 import Login from '../components/shared/auth/Login.vue'
 import Car from '../components/car/Car.vue'
 import CarList from '../components/car/CarList.vue'
+import Logout from '../components/shared/auth/Logout.vue'
 import { store } from '../store/store.js'
 
 export const router = new VueRouter({
     routes: [
         {
-            // name: 'Home',
+            name: 'home',
             path: '/',
-            component: Home
+            component: Home,
+            props: true
         },
         {
             path: '/register',
-            component: Register
+            component: Register,
+            meta: {
+                cannotBeLoggedIn: true
+            }
         },
         {
             path: '/login',
-            component: Login
+            component: Login,
+            meta: {
+                cannotBeLoggedIn: true
+            }
+        },
+        {
+            path: '/logout',
+            name: 'logout',
+            component: Logout,
+            meta: {
+                requiresAuth: true
+            }
         },
         {
             path: '/car',
@@ -36,19 +52,34 @@ export const router = new VueRouter({
             ]
         }
 
-    ], mode: 'history'
+    ], mode: 'history',
 })
 
 router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth)) {
         // if path has meta data containing requiresAuth, check if user is logged in
-        if (!store.state.isLoggedIn) {
+        if (!store.state.isLoggedIn && to.name === 'logout') {
+            next({
+                name: 'home'
+            })
+            return
+        } else if (!store.state.isLoggedIn) {
             next({
                 path: '/login',
                 query: {redirect: to.fullPath}
             })
             return
         }
+        next()
+    } 
+    if (to.matched.some(record => record.meta.cannotBeLoggedIn)) {
+        if (store.state.isLoggedIn) {
+            next({
+                name: 'home'
+            })
+            return
+        }
+        next()
     }
     next()
     

@@ -1,5 +1,4 @@
 import { httpApi } from '../../http/http-api.js';
-import { store } from '../../store/store.js';
 
 export const CarService = {
     getAll(){

@@ -1,6 +1,4 @@
-import axios from 'axios';
 import { httpApi } from '../../../http/http-api.js';
-
 
 export const AuthService = {
     login(form) {
@@ -12,8 +10,7 @@ export const AuthService = {
     },
     register(form) {
         return httpApi.post('/users/signup', form).then(response => {
-            console.log(response);
-            console.log('Successfully registered');
-        }).catch(err => console.error(err));
+            // console.log('successfully registered');
+        }).catch(err => { throw err });
     }
 }

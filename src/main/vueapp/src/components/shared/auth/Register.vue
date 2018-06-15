@@ -2,7 +2,13 @@
 
 <div>
     <b-alert :show="isFormInvalid" dismissible variant="danger">Your form is not valid! Please make sure to check, if all input is valid!</b-alert>
-
+    <b-alert :show="isServerNotResponding" dismissible variant="danger">
+        Server is not responding.
+        <br>
+        Error message: 
+        <br>
+        <em>{{error}}</em>
+    </b-alert>
     <b-form @submit.prevent="onSubmit">
         <b-form-group label="Username"
                     label-for="form.username"
@@ -50,7 +56,8 @@
 
 <script>
 
-import { AuthService } from './authService.js'
+import { AuthService } from './authService.js';
+import { EventBus } from '../../../event-bus.js';
 
 export default {
     data() {
@@ -62,20 +69,24 @@ export default {
                 lastName: ''
             },
             confirmPassword: '',
-            isFormInvalid: false
+            isFormInvalid: false,
+            isServerNotResponding: false,
+            error: ''
         }
     },
     methods: {
         onSubmit(event) {
-            console.log(this.form);
-            console.log(this.$router);
             this.isFormInvalid = false;
             if (!this.isValid()) {
                 this.isFormInvalid = true;
                 return;
             }
             AuthService.register(this.form).then(() => {
-                this.$router.push({path: '/'});
+                this.$router.push({name: 'home', params: {isRegistered: true}});
+            }).catch(err => {
+                this.isServerNotResponding = true;
+                this.error = `${err}`;
+                this.onReset();
             });
         },
         onReset() {

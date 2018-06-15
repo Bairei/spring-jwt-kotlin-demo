@@ -1,5 +1,7 @@
 <template>
     <div>
+        <b-alert dismissible variant="success" :show="isLoggedOut">Successfully logged out. Thanks for using our site!</b-alert>
+        <b-alert dismissible variant="success" :show="isRegistered">Registration was successful, now you can log in using your credentials!</b-alert>
         <img src="../../assets/logo.png">
         <h1>{{ msg }}</h1>
         <h2>Essential Links</h2>
@@ -19,12 +21,19 @@
     </div>
 </template>
 <script>
+import { EventBus } from '../../event-bus.js';
 export default {
     name: 'app',
+    props: ['isRegistered', 'isLoggedOut'],
     data () {
         return {
-        msg: 'Welcome to Your Vue.js App'
+            msg: 'Welcome to Your Vue.js App',
         }
+    },
+    created() {
+        EventBus.$on('logged-out', event => {
+            this.isLoggedOut = event;
+        });
     }
 }
 </script>

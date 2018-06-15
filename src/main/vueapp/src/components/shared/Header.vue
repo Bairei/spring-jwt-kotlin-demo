@@ -10,7 +10,7 @@
       <b-nav-item to="/" exact>Home</b-nav-item>
       <template v-if="isLoggedIn">
         <b-nav-item-dropdown right text="Car">
-          <b-dropdown-header>Hello</b-dropdown-header>
+          <!-- <b-dropdown-header>Hello</b-dropdown-header> -->
           <b-dropdown-item to="/car">List</b-dropdown-item>
         </b-nav-item-dropdown>
       </template>
@@ -25,7 +25,7 @@
         </template>
         <template v-else>
           <b-nav-text>Welcome, {{user}}!</b-nav-text>
-          <b-nav-item @click.prevent="logout()">Log out</b-nav-item>
+          <b-nav-item to="/logout">Log out</b-nav-item>
         </template>
         
     </b-navbar-nav>
@@ -43,11 +43,6 @@ export default {
     },
     user() {
       return this.$store.state.username
-    }
-  },
-  methods: {
-    logout() {
-      this.$store.dispatch('logout');
     }
   }
 }

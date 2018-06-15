@@ -20,8 +20,7 @@ export default {
     },
     mounted() {
         CarService.getAll().then(response => {
-            console.log(response.data);
-            this.items = response.data
+            this.items = response.data;
         });
     }
 }
