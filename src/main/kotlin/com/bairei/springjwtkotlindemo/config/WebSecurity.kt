@@ -41,7 +41,7 @@ class WebSecurity(@Qualifier("myUserDetails") private val userDetailsService: Us
         val source = UrlBasedCorsConfigurationSource()
         val config = CorsConfiguration().apply {
             allowCredentials = true
-            allowedOrigins = arrayListOf("http://localhost:8081", "http://localhost:4200")
+            allowedOrigins = arrayListOf("http://localhost:8081", "http://localhost:8080", "http://localhost:4200")
             addExposedHeader(SecurityConstants.HEADER_STRING)
             allowedHeaders = arrayListOf("*")
             allowedMethods = arrayListOf("*")

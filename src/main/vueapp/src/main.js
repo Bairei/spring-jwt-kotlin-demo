@@ -4,9 +4,9 @@ import VueRouter from 'vue-router'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import 'jquery/dist/jquery.js'
-import 'popper.js/dist/popper.js'
-import 'bootstrap/dist/js/bootstrap.js'
+// import 'jquery/dist/jquery.js'
+// import 'popper.js/dist/popper.js'
+// import 'bootstrap/dist/js/bootstrap.js'
 
 import App from './App.vue'
 import { router } from './routes/router'
