@@ -39,8 +39,10 @@ export default {
     methods: {
         onSubmit(event) {
             AuthService.login(this.form).then(token => {               
-                this.$store.dispatch('login', token);
-                this.$router.push({path: '/'});
+                this.$store.dispatch('login', token).then(() => {
+                    const redirect = this.$router.history.current.query.redirect;
+                    this.$router.push({path: redirect ? redirect : '/'});
+                });
             }).catch(err => {
                 console.error(err);
                 this.isLoginInvalid = true;

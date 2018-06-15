@@ -6,6 +6,7 @@ import Login from '../components/shared/auth/Login.vue'
 import Car from '../components/car/Car.vue'
 import CarList from '../components/car/CarList.vue'
 import Logout from '../components/shared/auth/Logout.vue'
+import CarDetails from '../components/car/CarDetails.vue'
 import { store } from '../store/store.js'
 
 export const router = new VueRouter({
@@ -45,6 +46,10 @@ export const router = new VueRouter({
                 requiresAuth: true
             },
             children: [
+                {
+                    path: ':id',
+                    component: CarDetails
+                },
                 {
                     path: '',
                     component: CarList
