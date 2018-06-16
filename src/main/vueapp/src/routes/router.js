@@ -7,6 +7,7 @@ import Car from '../components/car/Car.vue'
 import CarList from '../components/car/CarList.vue'
 import Logout from '../components/shared/auth/Logout.vue'
 import CarDetails from '../components/car/CarDetails.vue'
+import CarForm from '../components/car/CarForm.vue'
 import { store } from '../store/store.js'
 
 export const router = new VueRouter({
@@ -47,6 +48,17 @@ export const router = new VueRouter({
             },
             children: [
                 {
+                    path: 'create',
+                    component: CarForm,
+                    name: 'car-create'
+                },
+                {
+                    path: ':id/edit',
+                    component: CarForm,
+                    name: 'car-edit',
+                    props: true
+                },
+                {
                     path: ':id',
                     component: CarDetails
                 },
@@ -56,8 +68,7 @@ export const router = new VueRouter({
                 }
             ]
         }
-
-    ], mode: 'history',
+    ], mode: 'history'
 })
 
 router.beforeEach((to, from, next) => {

@@ -12,6 +12,7 @@
         <b-nav-item-dropdown right text="Car">
           <!-- <b-dropdown-header>Hello</b-dropdown-header> -->
           <b-dropdown-item to="/car">List</b-dropdown-item>
+          <b-dropdown-item to="/car/create">Create a Car</b-dropdown-item>
         </b-nav-item-dropdown>
       </template>
     </b-navbar-nav>

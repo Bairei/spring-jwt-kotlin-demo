@@ -4,11 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.bairei</groupId>
-	<artifactId>spring-jwt-kotlin-demo</artifactId>
+	<artifactId>spring-kotlin-vue-jwt-demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>spring-jwt-kotlin-demo</name>
+	<name>spring-kotlin-vue-jwt-demo</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -22,7 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<kotlin.version>1.2.41</kotlin.version>
+		<kotlin.version>1.2.50</kotlin.version>
 		<docker.image.prefix>bairei</docker.image.prefix>
 	</properties>
 

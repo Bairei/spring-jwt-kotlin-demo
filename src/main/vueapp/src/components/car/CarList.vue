@@ -26,6 +26,9 @@ export default {
     mounted() {
         CarService.getAll().then(response => {
             this.items = response.data;
+        }).catch(err => {
+            console.error(err);
+            this.$router.push({path: '/'});
         });
     }
 }

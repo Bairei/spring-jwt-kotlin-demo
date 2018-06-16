@@ -6,14 +6,14 @@ export const CarService = {
             headers: {
                 'Authorization': localStorage.getItem('authorization')
             }
-        }).catch(err => console.error(err));
+        }).catch(err => {throw err});
     },
     getOne(id){
         return httpApi.get(`/car/${id}`, {
             headers: {
                 'Authorization': localStorage.getItem('authorization')
             }
-        }).catch(err => console.error(err));
+        }).catch(err => { throw err });
     },
     deleteById(id){
         return httpApi.delete(`/car/${id}`, {
@@ -21,5 +21,19 @@ export const CarService = {
                 'Authorization': localStorage.getItem('authorization')
             }
         }).catch(err => {throw err});
-    }
+    },
+    updateCar(car, id){
+        return httpApi.put(`/car/${id}`, car, {
+            headers: {
+                'Authorization': localStorage.getItem('authorization')
+            }
+        }).catch(err => {throw err});
+    },
+    postCar(car){
+        return httpApi.post('/car', car, {
+            headers: {
+                'Authorization': localStorage.getItem('authorization')
+            }
+        }).catch(err => {throw err});
+    },
 };

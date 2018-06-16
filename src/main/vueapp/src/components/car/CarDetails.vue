@@ -28,6 +28,7 @@
                     Are you sure you want to delete this item? Press the button again to confirm.
                 </b-alert>
                 <b-button @click="onDelete" variant="danger">Delete</b-button>
+                <b-button @click="onEdit" variant="info">Edit</b-button>
             </b-col>
         </template>
     </div>
@@ -50,9 +51,7 @@ export default {
     },
     mounted() {
         this.car.id = this.$router.history.current.params.id;
-        console.log(this.car.id);
         CarService.getOne(this.car.id).then((response) => {
-            console.log(response.data);
             this.car = response.data;
         }).catch(err => {
             this.$router.push({path: '/car'});
@@ -65,10 +64,12 @@ export default {
                 return;
             } else {
                 CarService.deleteById(this.car.id).then(response => {
-                    console.log(response);
                     this.$router.push({path: '/car'});
                 })
             }
+        },
+        onEdit() {
+            this.$router.push({name: 'car-edit', params:{id: this.car.id}});
         }
     }
 }
