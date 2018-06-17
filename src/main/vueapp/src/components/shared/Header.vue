@@ -14,6 +14,8 @@
           <b-dropdown-item to="/car">List</b-dropdown-item>
           <b-dropdown-item to="/car/create">Create a Car</b-dropdown-item>
         </b-nav-item-dropdown>
+        <b-nav-item v-if="$store.state.role === 'ROLE_ADMIN'">Admin page</b-nav-item>
+        <b-nav-item v-else-if="$store.state.role === 'ROLE_USER'">User page</b-nav-item>
       </template>
     </b-navbar-nav>
 

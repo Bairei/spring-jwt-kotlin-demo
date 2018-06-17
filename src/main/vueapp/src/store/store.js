@@ -24,7 +24,7 @@ export const store = new Vuex.Store({
             localStorage.setItem('authorization', token);
             const decodedToken = jwt_decode(token.split(" ")[1]);
             this.state.username = decodedToken.sub;
-            this.state.role = decodedToken.roles[0] || ROLE_NONE;
+            this.state.role = decodedToken.roles[0] ? decodedToken.roles[0].authority : ROLE_NONE;
             return new Promise((resolve, reject) => {
                 resolve();
             });
