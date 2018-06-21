@@ -2,14 +2,19 @@ package com.bairei.springjwtkotlindemo.bootstrap
 
 import com.bairei.springjwtkotlindemo.domain.Car
 import com.bairei.springjwtkotlindemo.domain.auth.Role
+import com.bairei.springjwtkotlindemo.domain.auth.User
 import com.bairei.springjwtkotlindemo.repository.CarRepository
 import com.bairei.springjwtkotlindemo.repository.RoleRepository
+import com.bairei.springjwtkotlindemo.repository.UserRepository
 import org.springframework.boot.CommandLineRunner
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Component
 
 @Component
 class Bootstrap(private val carRepository: CarRepository,
-                private val roleRepository: RoleRepository): CommandLineRunner {
+                private val roleRepository: RoleRepository,
+                private val userRepository: UserRepository,
+                private val bCryptPasswordEncoder: BCryptPasswordEncoder): CommandLineRunner {
 
     override fun run(vararg args: String?) {
         if (carRepository.count() == 0L) {
@@ -42,6 +47,14 @@ class Bootstrap(private val carRepository: CarRepository,
 
             roleRepository.saveAll(roles)
             println("Current role count: ${roleRepository.count()}")
+        }
+        if (userRepository.count() < 1) {
+            val admin = User(username = "bairei",
+                    password = bCryptPasswordEncoder.encode("admin"),
+                    firstName = "Bairei", lastName = "Kawagishi",
+                    roles = arrayListOf(roleRepository.findRoleByRoleName("ROLE_ADMIN")))
+            userRepository.save(admin)
+            println("Current user count: ${userRepository.count()}")
         }
     }
 }

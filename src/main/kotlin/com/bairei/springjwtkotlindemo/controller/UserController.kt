@@ -23,7 +23,7 @@ class UserController(private val userRepository: UserRepository,
             return ResponseEntity("This user is already registered!", HttpStatus.BAD_REQUEST)
         }
         user.password = bCryptPasswordEncoder.encode(user.password)
-        user.roles = arrayListOf(roleService.getAdminRole())
+        user.roles = arrayListOf(roleService.getUserRole())
         userRepository.save(user)
 
         return ResponseEntity.ok("User successfully registered, now you can log in using these credentials")

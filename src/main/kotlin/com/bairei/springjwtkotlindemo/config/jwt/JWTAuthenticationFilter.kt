@@ -42,6 +42,7 @@ class JWTAuthenticationFilter(
                                           chain: FilterChain, authResult: Authentication) {
         val token = Jwts.builder()
                 .setSubject((authResult.principal as org.springframework.security.core.userdetails.User).username)
+                .claim("roles", (authResult.principal as org.springframework.security.core.userdetails.User).authorities)
                 .setExpiration(Date(System.currentTimeMillis() + EXPIRATION_DATE))
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact()

@@ -18,6 +18,6 @@ class MyUserDetails (private val userRepository: UserRepository): UserDetailsSer
 
         val userObject = user.get()
         return  org.springframework.security.core.userdetails.User(userObject.username,
-                userObject.password, ArrayList())
+                userObject.password, userObject.roles)
     }
 }
