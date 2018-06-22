@@ -50,7 +50,7 @@ export default {
         }
     },
     mounted() {
-        this.car.id = this.$router.history.current.params.id;
+        this.car.id = this.$route.params.id;
         CarService.getOne(this.car.id).then((response) => {
             this.car = response.data;
         }).catch(err => {

@@ -9,7 +9,7 @@ export const AuthService = {
         }).catch(err => { throw err });
     },
     register(form) {
-        return httpApi.post('/users/signup', form).then(response => {
+        return httpApi.post('/signup', form).then(response => {
             // console.log('successfully registered');
         }).catch(err => { throw err });
     }

@@ -35,7 +35,7 @@ import { CarService } from './carService.js';
 export default {
     data() {
         return {
-            id: this.$router.currentRoute.params.id || null,
+            id: this.$route.params.id || null,
             form: {
                 make: '',
                 model: '',

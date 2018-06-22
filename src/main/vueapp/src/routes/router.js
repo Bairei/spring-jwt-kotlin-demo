@@ -8,6 +8,7 @@ import CarList from '../components/car/CarList.vue'
 import Logout from '../components/shared/auth/Logout.vue'
 import CarDetails from '../components/car/CarDetails.vue'
 import CarForm from '../components/car/CarForm.vue'
+import UserDetails from '../components/user/UserDetails.vue'
 import { store } from '../store/store.js'
 
 export const router = new VueRouter({
@@ -65,6 +66,19 @@ export const router = new VueRouter({
                 {
                     path: '',
                     component: CarList
+                }
+            ]
+        },
+        {
+            path: '/user',
+            meta: {
+                requiresAuth: true
+            },
+            component: UserDetails,
+            children: [
+                {
+                    path: ':username',
+                    component: UserDetails,
                 }
             ]
         }
