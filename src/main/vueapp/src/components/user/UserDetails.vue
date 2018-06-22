@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import {httpApi} from '../../http/http-api.js';
+import {httpApi} from '../../http/http-api.js'
 export default {
     data() {
         return {
@@ -42,7 +42,6 @@ export default {
     },
     mounted() {
         this.username = this.$route.params.username || this.currentUser
-        console.log(this.username);
     },
     methods: {
         getUser() {

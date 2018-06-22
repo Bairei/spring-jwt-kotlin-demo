@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { CarService } from './carService.js';
+import { CarService } from './carService.js'
 
 export default {
     data() {
@@ -25,11 +25,11 @@ export default {
     },
     mounted() {
         CarService.getAll().then(response => {
-            this.items = response.data;
+            this.items = response.data
         }).catch(err => {
-            console.error(err);
-            this.$router.push({path: '/'});
-        });
+            console.error(err)
+            this.$router.push({path: '/'})
+        })
     }
 }
 </script>

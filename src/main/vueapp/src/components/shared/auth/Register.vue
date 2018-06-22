@@ -56,8 +56,8 @@
 
 <script>
 
-import { AuthService } from './authService.js';
-import { EventBus } from '../../../event-bus.js';
+import { AuthService } from './authService.js'
+import { EventBus } from '../../../event-bus.js'
 
 export default {
     data() {
@@ -76,22 +76,22 @@ export default {
     },
     methods: {
         onSubmit(event) {
-            this.isFormInvalid = false;
+            this.isFormInvalid = false
             if (!this.isValid()) {
-                this.isFormInvalid = true;
-                return;
+                this.isFormInvalid = true
+                return
             }
             AuthService.register(this.form).then(() => {
-                this.$router.push({name: 'home', params: {isRegistered: true}});
+                this.$router.push({name: 'home', params: {isRegistered: true}})
             }).catch(err => {
-                this.isServerNotResponding = true;
-                this.error = `${err}`;
-                this.onReset();
-            });
+                this.isServerNotResponding = true
+                this.error = `${err}`
+                this.onReset()
+            })
         },
         onReset() {
-            this.form.username = '';
-            this.form.password = '';
+            this.form.username = ''
+            this.form.password = ''
         },
         isValid() {
             return this.form.username !== "" && this.form.password !== "" 

@@ -21,7 +21,7 @@
     </div>
 </template>
 <script>
-import { EventBus } from '../../event-bus.js';
+import { EventBus } from '../../event-bus.js'
 export default {
     name: 'app',
     props: ['isRegistered', 'isLoggedOut'],
@@ -32,8 +32,8 @@ export default {
     },
     created() {
         EventBus.$on('logged-out', event => {
-            this.isLoggedOut = event;
-        });
+            this.isLoggedOut = event
+        })
     }
 }
 </script>

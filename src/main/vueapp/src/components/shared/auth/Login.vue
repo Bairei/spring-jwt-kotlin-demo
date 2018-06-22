@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { AuthService } from './authService.js';
+import { AuthService } from './authService.js'
 
 export default {
     data() {
@@ -40,18 +40,18 @@ export default {
         onSubmit(event) {
             AuthService.login(this.form).then(token => {               
                 this.$store.dispatch('login', token).then(() => {
-                    const redirect = this.$router.history.current.query.redirect;
-                    this.$router.push({path: redirect ? redirect : '/'});
-                });
+                    const redirect = this.$router.history.current.query.redirect
+                    this.$router.push({path: redirect ? redirect : '/'})
+                })
             }).catch(err => {
-                console.error(err);
-                this.isLoginInvalid = true;
-                this.onReset();
-            });
+                console.error(err)
+                this.isLoginInvalid = true
+                this.onReset()
+            })
         },
         onReset() {
-            this.form.username = '';
-            this.form.password = '';
+            this.form.username = ''
+            this.form.password = ''
         }
     }
 }

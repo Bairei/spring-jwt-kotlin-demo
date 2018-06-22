@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { CarService } from './carService.js';
+import { CarService } from './carService.js'
 export default {
     data() {
         return {
@@ -47,30 +47,30 @@ export default {
     mounted(){
         if (this.id) {
             CarService.getOne(this.id).then(response => {
-                this.form = response.data;
-            }).catch(err => this.$router.push({path: '/car'}));
+                this.form = response.data
+            }).catch(err => this.$router.push({path: '/car'}))
         }
     },
     methods: {
         onReset() {
-            this.form.make = '';
-            this.form.model = '';
-            this.form.horsePower = 0;
-            this.form.yearOfProduction = 0;
+            this.form.make = ''
+            this.form.model = ''
+            this.form.horsePower = 0
+            this.form.yearOfProduction = 0
         },
         onSubmit() {
             if (this.id) {
                 CarService.updateCar(this.form, this.id).then(response => {
-                    this.$router.push({path: '/car'});
+                    this.$router.push({path: '/car'})
                 }).catch(err => {
-                    console.error(err);
-                });
+                    console.error(err)
+                })
             } else {
                 CarService.postCar(this.form).then(response => {
-                    this.$router.push({path: '/car'});
+                    this.$router.push({path: '/car'})
                 }).catch(err => {
-                    console.error(err);
-                });
+                    console.error(err)
+                })
             }
         }
     }

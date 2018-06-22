@@ -50,26 +50,26 @@ export default {
         }
     },
     mounted() {
-        this.car.id = this.$route.params.id;
+        this.car.id = this.$route.params.id
         CarService.getOne(this.car.id).then((response) => {
-            this.car = response.data;
+            this.car = response.data
         }).catch(err => {
-            this.$router.push({path: '/car'});
-        });
+            this.$router.push({path: '/car'})
+        })
     },
     methods: {
         onDelete() {
             if (!this.isDeletePressed) {
-                this.isDeletePressed = true;
-                return;
+                this.isDeletePressed = true
+                return
             } else {
                 CarService.deleteById(this.car.id).then(response => {
-                    this.$router.push({path: '/car'});
+                    this.$router.push({path: '/car'})
                 })
             }
         },
         onEdit() {
-            this.$router.push({name: 'car-edit', params:{id: this.car.id}});
+            this.$router.push({name: 'car-edit', params:{id: this.car.id}})
         }
     }
 }
