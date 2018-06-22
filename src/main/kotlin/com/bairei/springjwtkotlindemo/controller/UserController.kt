@@ -33,7 +33,7 @@ class UserController(private val userRepository: UserRepository,
     fun getUserInfo(@PathVariable username: String): UserDto {
         val user = userRepository.findByUsername(username)
         if (user.isPresent) {
-            return userToUserDto.convert(user.get())
+            return user.map(userToUserDto::convert).get()
         } else throw UserNotFoundException("Couldn't get info for user $username!")
     }
 
