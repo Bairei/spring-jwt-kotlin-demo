@@ -3,9 +3,11 @@ package com.bairei.springjwtkotlindemo.config
 import com.bairei.springjwtkotlindemo.config.SecurityConstants.SIGN_UP_URL
 import com.bairei.springjwtkotlindemo.config.jwt.JWTAuthenticationFilter
 import com.bairei.springjwtkotlindemo.config.jwt.JWTAuthorizationFilter
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.context.annotation.Bean
 import org.springframework.http.HttpMethod
+import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -26,7 +28,7 @@ class WebSecurity(@Qualifier("myUserDetails") private val userDetailsService: Us
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .addFilter(JWTAuthenticationFilter(authenticationManager(), userDetailsService))
+                .addFilter(getJWTAuthenticationFilter())
                 .addFilter(JWTAuthorizationFilter(authenticationManager(), userDetailsService))
                 // disabling session creation on Spring Security
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -34,6 +36,18 @@ class WebSecurity(@Qualifier("myUserDetails") private val userDetailsService: Us
 
     override fun configure(auth: AuthenticationManagerBuilder) {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder)
+    }
+
+
+
+    @Bean
+    fun getJWTAuthenticationFilter(): JWTAuthenticationFilter {
+        val manager = authenticationManager()
+        val filter = JWTAuthenticationFilter(authenticationManager(), userDetailsService)
+        filter.setAuthenticationManager(authenticationManager())    // ??? - throws 'AuthenticationManager must be
+                                                                    // specified' exception without this
+        filter.setFilterProcessesUrl("/api/login")
+        return filter
     }
 
     @Bean

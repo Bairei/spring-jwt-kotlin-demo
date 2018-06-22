@@ -22,8 +22,8 @@ import kotlin.collections.ArrayList
 
 
 class JWTAuthenticationFilter(
-        private val authManager: AuthenticationManager
-        ,private val userDetailsService: UserDetailsService
+        private val authManager: AuthenticationManager,
+        private val userDetailsService: UserDetailsService
 ): UsernamePasswordAuthenticationFilter() {
 
     override fun attemptAuthentication(request: HttpServletRequest, response: HttpServletResponse): Authentication {

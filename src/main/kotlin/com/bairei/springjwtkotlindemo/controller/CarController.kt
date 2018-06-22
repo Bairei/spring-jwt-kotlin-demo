@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 import javax.persistence.EntityNotFoundException
 
 @RestController
-@RequestMapping("/car")
+@RequestMapping("/api/car")
 class CarController(private val carRepository: CarRepository) {
 
     @PostMapping

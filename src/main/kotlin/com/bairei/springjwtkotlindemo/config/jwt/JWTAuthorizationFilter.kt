@@ -13,8 +13,8 @@ import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
-class JWTAuthorizationFilter(authenticationManager: AuthenticationManager
-                             ,private val userDetailsService: UserDetailsService
+class JWTAuthorizationFilter(authenticationManager: AuthenticationManager,
+                             private val userDetailsService: UserDetailsService
 ) : BasicAuthenticationFilter(authenticationManager) {
 
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, chain: FilterChain) {
